@@ -1,0 +1,69 @@
+//14기 1회차 월말평가 문제2.
+
+import java.io.*;
+import java.util.*;
+
+public class Test2_07 {
+	public static void main(String[] args) throws IOException{
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		
+		int[] arrR = {-1,-1,-1,0,1,1,1,0};
+		int[] arrC = {-1,0,1,1,1,0,-1,-1};
+		
+		int T = Integer.parseInt(br.readLine());
+		for (int i=1; i<T+1; i++) {
+			int N = Integer.parseInt(br.readLine());
+			int maxNum = 0;
+			
+			int[][] arr = new int[N+1][N+1]; //연못을 만들어요 
+			
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int stoneNum = Integer.parseInt(st.nextToken());
+			int[] arrS = new int[stoneNum]; //돌들의 힘의 세기
+			for(int j =0; j<stoneNum; j++) {
+				arrS[j] = Integer.parseInt(st.nextToken());
+			} // 돌 세기를 다 담았어요
+			
+			int [] arrX = new int[stoneNum];//돌 좌표 X
+			int [] arrY = new int[stoneNum];//돌 좌표 Y
+			
+			StringTokenizer st1 = new StringTokenizer(br.readLine());
+			for(int j=0; j<stoneNum; j++) {
+				arrX[j] = Integer.parseInt(st1.nextToken());
+				arrY[j] = Integer.parseInt(st1.nextToken());
+			}//좌표 다 담음.
+			
+			//연산을 시작합시다.
+			
+			for(int j =0; j<stoneNum; j++) {
+				arr[arrX[j]][arrY[j]] = 1; //시작좌표 1주기
+				
+				for(int k =1; k<arrS[j]+1; k++) {
+					//돌의 세기만큼 반복
+					for(int z =0; z<8; z++) {
+						// 팔방탐색 시작
+						int ar = arrX[j] + arrR[z]*k;
+						int ac = arrY[j] + arrC[z]*k; 
+						
+						if(0<=ar&&ar<N && 0<=ac&&ac<N) {
+							arr[ar][ac] += 1;
+							maxNum = Math.max(maxNum, arr[ar][ac]);
+						}
+						
+					}//팔방 탐색 종료
+					
+				}//돌의 세기 만큼 반복 종료
+				
+			}//돌 좌표 반복 종료
+			
+			
+			System.out.println("#"+i+" "+maxNum);
+			
+		}//테스트 케이스 종료
+		
+	}
+	
+
+}
