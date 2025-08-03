@@ -1,0 +1,59 @@
+//14기 7월 월말평가 문제3. 다이어트
+
+import java.io.*;
+import java.util.*;
+
+public class testtest1 {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int T = Integer.parseInt(br.readLine()); //4
+		
+			int[] arr1 = new int[3]; //상하 넣기
+			int[] arr2 = new int[3]; //좌우 넣기
+			int arr1Idx =0; //arr1  idx
+			int arr2Idx =0;
+			
+			int bigUp =0; //상하 중 제일 큰 친구
+			int bigSide =0; //좌우 중 제일 큰 친구
+			int smallUp =1000000;
+			int smallSide = 100000000;
+			
+			for (int j=0; j<6; j++) {
+				StringTokenizer st = new StringTokenizer(br.readLine()); //지금 토크나이저 들어옴.
+				//토크나이저는 어디로 들어오는 걸까...???
+				
+				int p = Integer.parseInt(st.nextToken()); //방향 입력
+				int pNum = Integer.parseInt(st.nextToken()); //값 입력
+				if(p==4 | p==3) {
+					bigUp = Math.max(bigUp, pNum);
+					smallUp = Math.min(smallUp, pNum);
+					
+					
+				}else {
+					bigSide = Math.max(bigSide, pNum);
+					smallSide = Math.min(smallSide, pNum);
+				}
+				
+			} // 상하좌우 전부 들어감.
+			
+			//BigSum = 상하 중 제일 긴 친구 * 좌우중 제일 짧은 친구
+			int BigSum = bigUp * bigSide;
+			System.out.println("BigSum: " + BigSum +" ");
+			//SmallSum = 상하 중 제일 긴 친구 * 좌우중 제일 짧은 친구
+			int smallSum = smallUp*smallSide;
+			
+			//면적 구하기
+			int mm = BigSum - smallSum;
+			
+			//칼로리 구하기
+			int result = mm*T;
+			
+			//정답 출력
+			System.out.println("result : " + result);
+		
+
+	}
+
+}
